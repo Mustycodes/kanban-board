@@ -8,7 +8,7 @@ type AddItemButtonProps = {
 
 export function App() {
   return (
-    <div className="App-container">
+    <main id="app-container" className="bg-primary flex items-start gap-5 h-full w-full p-5">
       <Column text="To Do">
         <Card text="Generate App Structure" />
       </Column>
@@ -20,6 +20,6 @@ export function App() {
       </Column>
 
       <AddNewItem toggleButtonText="+ Add another list" onAdd={console.log} />
-    </div>
+    </main>
   );
 }
