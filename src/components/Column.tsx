@@ -1,8 +1,5 @@
+import { ColumnProps } from "../types";
 import { AddNewItem } from "./AddNewItem";
-
-type ColumnProps = {
-  text: string;
-};
 
 export const Column: React.FC<ColumnProps> = ({ text, children }) => {
   return (

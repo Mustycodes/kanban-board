@@ -1,9 +1,6 @@
 import { useState } from "react";
+import { NewItemFormProps } from "../types";
 import { useFocus } from "../utils/hooks/useFocus";
-
-type NewItemFormProps = {
-  onAdd(text: string): void;
-};
 
 export const NewItemForm = ({ onAdd }: NewItemFormProps) => {
   const [text, setText] = useState("");
