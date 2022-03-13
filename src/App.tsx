@@ -1,13 +1,10 @@
 import { AddNewItem } from "./components/AddNewItem";
 import { Column } from "./components/Column";
+import { addList } from "./state/actions";
 import { useAppState } from "./state/AppStateContext";
 
-type AddItemButtonProps = {
-  dark?: boolean;
-};
-
 export function App() {
-  const { lists } = useAppState();
+  const { lists, dispatch } = useAppState();
   return (
     <main
       id="app-container"
@@ -16,7 +13,7 @@ export function App() {
       {lists.map((list) => (
         <Column key={list.id} id={list.id} text={list.text} />
       ))}
-      <AddNewItem toggleButtonText="+ Add another list" onAdd={console.log} />
+      <AddNewItem toggleButtonText="+ Add another list" onAdd={text => dispatch(addList(text))} />
     </main>
   );
 }

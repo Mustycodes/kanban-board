@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AddNewItemProps } from "../types";
+import { AddItemButton } from "./AddItemButton";
 import { NewItemForm } from "./NewItemForm";
 
 export const AddNewItem = (props: AddNewItemProps) => {
@@ -17,8 +18,8 @@ export const AddNewItem = (props: AddNewItemProps) => {
     );
   }
   return (
-    <button id="add-item-btn" onClick={() => setShowForm(true)} className={`${dark ? 'text-black' : 'text-white'} w-full max-w-[300px] text-left py-2.5 px-3 bg-[#ffffff3d] hover:bg-[#ffffff64] transition-colors duration-75 ease-in`}>
+    <AddItemButton dark={dark} onClick={() => setShowForm(true)}>
       {toggleButtonText}
-    </button>
+    </AddItemButton>
   );
 };
