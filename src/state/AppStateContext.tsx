@@ -1,21 +1,7 @@
-import { createContext } from "react";
+import { createContext, useContext, FC } from "react";
+import { AppState, AppStateContextProps } from "../types";
 
-type Task = {
-  id: string;
-  text: string;
-};
-
-type List = {
-  id: string;
-  text: string;
-  tasks: Task[];
-};
-
-type AppState = {
-  lists: List[];
-};
-
-const appData:AppState = {
+const appData: AppState = {
   lists: [
     {
       id: "0",
@@ -35,4 +21,21 @@ const appData:AppState = {
   ],
 };
 
-const AppStateContext = createContext(null);
+const AppStateContext = createContext<AppStateContextProps>(
+  {} as AppStateContextProps
+);
+
+export const useAppState = () => useContext(AppStateContext);
+
+export const AppStateProvider: FC = ({ children }) => {
+  const { lists } = appData;
+
+  const getTasksByListId = (id: string) => {
+    return lists.find((list) => list.id === id)?.tasks || [];
+  };
+  return (
+    <AppStateContext.Provider value={{ lists, getTasksByListId }}>
+      {children}
+    </AppStateContext.Provider>
+  );
+};
