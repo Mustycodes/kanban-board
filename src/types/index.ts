@@ -1,3 +1,5 @@
+import { Dispatch } from "react";
+
 export type CardProps = {
   text: string;
   id: string;
@@ -18,6 +20,19 @@ export type AddNewItemProps = {
   dark?: boolean;
 };
 
+
+interface AddListAction {
+  type: "ADD LIST";
+  payload: string;
+}
+
+interface AddTaskAction {
+  type: "ADD TASK";
+  payload: { text: string; listId: string };
+}
+
+export type Action = AddListAction | AddTaskAction;
+
 // AppStateContext
 export type Task = {
   id: string;
@@ -37,4 +52,5 @@ export type AppState = {
 export type AppStateContextProps = {
   lists: List[];
   getTasksByListId(id: string): Task[];
+  dispatch: Dispatch<Action>
 };
