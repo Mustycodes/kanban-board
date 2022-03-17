@@ -1,13 +1,13 @@
 import { nanoid } from "nanoid";
 import { Action, AppState } from "../types";
-import { findItemIndexById } from "../utils/functions/arrayUtils";
+import { findItemIndexById, moveItem } from "../utils/functions/arrayUtils";
 
 export const appStateReducer = (
   mutableState: AppState,
   action: Action
 ): AppState | void => {
   switch (action.type) {
-    case "ADD LIST":
+    case "ADD_LIST":
       mutableState.lists.push({
         id: nanoid(),
         text: action.payload,
@@ -15,20 +15,20 @@ export const appStateReducer = (
       });
       break;
 
-    case "ADD TASK":
-      const {text, listId} = action.payload;
-      console.log({text});
-      console.log({listId});
-      
-      
+    case "ADD_TASK":
+      const { text, listId } = action.payload;
       const targetListIndex = findItemIndexById(mutableState.lists, listId);
-      console.log({targetListIndex});
-      
       mutableState.lists[targetListIndex].tasks.push({
         id: nanoid(),
-        text
-      })
+        text,
+      });
+      break;
 
+    case "MOVE_LIST":
+      const { draggedId, hoverId } = action.payload;
+      const dragIndex = findItemIndexById(mutableState.lists, draggedId);
+      const hoverIndex = findItemIndexById(mutableState.lists, hoverId);
+      mutableState.lists = moveItem(mutableState.lists, dragIndex, hoverIndex);
       break;
     default:
       break;

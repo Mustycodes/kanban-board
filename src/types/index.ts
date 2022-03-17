@@ -7,7 +7,7 @@ export type CardProps = {
 
 export type ColumnProps = {
   text: string;
-  id:string;
+  id: string;
 };
 
 export type NewItemFormProps = {
@@ -20,18 +20,22 @@ export type AddNewItemProps = {
   dark?: boolean;
 };
 
-
 interface AddListAction {
-  type: "ADD LIST";
+  type: "ADD_LIST";
   payload: string;
 }
 
 interface AddTaskAction {
-  type: "ADD TASK";
+  type: "ADD_TASK";
   payload: { text: string; listId: string };
 }
 
-export type Action = AddListAction | AddTaskAction;
+interface MoveListAction {
+  type: "MOVE_LIST";
+  payload: { draggedId: string; hoverId: string };
+}
+
+export type Action = AddListAction | AddTaskAction | MoveListAction;
 
 // AppStateContext
 export type Task = {
@@ -52,5 +56,5 @@ export type AppState = {
 export type AppStateContextProps = {
   lists: List[];
   getTasksByListId(id: string): Task[];
-  dispatch: Dispatch<Action>
+  dispatch: Dispatch<Action>;
 };
