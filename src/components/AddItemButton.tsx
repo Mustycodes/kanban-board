@@ -2,6 +2,7 @@ type AddItemButtonProps = {
   dark?: boolean;
   onClick(): void;
 };
+
 export const AddItemButton: React.FC<AddItemButtonProps> = ({
   children,
   dark,
@@ -18,4 +19,4 @@ export const AddItemButton: React.FC<AddItemButtonProps> = ({
       {children}
     </button>
   );
-};
+}

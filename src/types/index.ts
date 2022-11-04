@@ -1,4 +1,4 @@
-import { Dispatch } from "react";
+import React, { Dispatch } from "react";
 
 export type CardProps = {
   text: string;
@@ -8,6 +8,7 @@ export type CardProps = {
 export type ColumnProps = {
   text: string;
   id: string;
+  children?: React.ReactNode
 };
 
 export type NewItemFormProps = {
@@ -35,7 +36,16 @@ interface MoveListAction {
   payload: { draggedId: string; hoverId: string };
 }
 
-export type Action = AddListAction | AddTaskAction | MoveListAction;
+interface SetDraggedItemAction {
+  type: "SET_DRAGGED_ITEM";
+  payload: DragItem | null;
+}
+
+export type Action =
+  | AddListAction
+  | AddTaskAction
+  | MoveListAction
+  | SetDraggedItemAction;
 
 // AppStateContext
 export type Task = {
@@ -51,10 +61,20 @@ export type List = {
 
 export type AppState = {
   lists: List[];
+  // draggedItem: DragItem | null;
 };
 
 export type AppStateContextProps = {
+  // draggedItem: DragItem | null;
   lists: List[];
   getTasksByListId(id: string): Task[];
-  dispatch: Dispatch<Action>;
+  // dispatch: Dispatch<Action>;
 };
+
+export type ColumnDragItem = {
+  id: string;
+  text: string;
+  type: "COLUMN";
+};
+
+export type DragItem = ColumnDragItem;
